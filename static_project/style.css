@@ -11,6 +11,12 @@ body {
 .mb-7{
     margin-bottom: 7px;
 }
+.mt-5{
+    margin-top: 5px !important;
+}
+.br-8{
+    border-radius: 8px;
+}
 
 .mymodal {
     height:300px !important;

@@ -2,6 +2,34 @@ from django.db import models
 from django.contrib.auth.models import User
 from .utils import get_random_code
 from django.template.defaultfilters import slugify
+from django.db.models import Q
+
+class ProfileManager(models.Manager):
+
+    def get_all_profiles_to_invite(self, sender):
+        profiles = Profile.objects.all().exclude(user=sender)
+        profile = Profile.objects.get(user=sender)
+        qs = Relationship.objects.filter(Q(sender=profile) | Q(receiver=profile))
+        print(qs)
+        print("##########")
+
+        accepted = set([])
+        for rel in qs:
+            if rel.status == 'accepted':
+                accepted.append(rel.receiver)
+                accepted.add(rel.sender)
+        print(accepted)
+
+        available = [profile for profile in profiles if profile not in accepted]
+        print(available)
+        print("##########")
+        return available
+        
+
+
+    def get_all_profiles(self, me):
+        profiles = Profile.objects.all().exclude(user=me)
+        return profiles
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=200, blank=True) 
@@ -15,6 +43,8 @@ class Profile(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = ProfileManager()
 
     def get_friends(self):
         return self.friends.all()
@@ -65,7 +95,10 @@ STATUS_CHOICES = (
     ('accepted', 'accepted')
 )
 
-
+class RelationshipManager(models.Manager):
+    def invatations_received(self, receiver):
+        qs = Relationship.objects.filter(receiver=receiver, status='send')
+        return qs
 
 
 class Relationship(models.Model):
@@ -74,6 +107,9 @@ class Relationship(models.Model):
     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = RelationshipManager()
+
 
     def __str__(self):
         return f"{self.sender}-{self.receiver}-{self.status}"

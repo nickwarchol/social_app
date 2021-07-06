@@ -3,10 +3,10 @@ from django.shortcuts import render
 
 def home_view(request):
     user = request.user
-    hello = 'Hello, world'
+    welcome = 'Welcome to pEarth'
 
     context = {
+        'welcome': welcome,
         'user' : user,
-        'hello' : hello,
     }
     return render(request, 'main/home.html', context)

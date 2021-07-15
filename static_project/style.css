@@ -5,7 +5,7 @@ body {
 .nav {
     border-radius: 0px !important;
     padding: 10px 0 10 px 0 !important;
-    background-color: #396afc !important;
+    background-color: black !important;
 }
 
 .mb-7{
@@ -26,6 +26,10 @@ body {
 
 .mb-5{
     margin-bottom: 5px !important;
+}
+
+.w-big {
+    width: 200px !important;
 }
 
 .bwhite-lg{

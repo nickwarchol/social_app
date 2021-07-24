@@ -1,11 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+html{
+    font-size: 100%;
+}
+
 body {
-    background: #f8f8f8 !important;
+    background: #f8f8f8;
 }
 
 .nav {
     border-radius: 0px !important;
     padding: 10px 0 10 px 0 !important;
-    background-color: #235821 !important;
+    background-color: #276825 !important;
 }
 
 .mb-7{
@@ -16,6 +21,10 @@ body {
 }
 .br-8{
     border-radius: 8px;
+}
+
+.ui-grid{
+    min-height: calc(100vh - 10rem);
 }
 
 .mymodal {

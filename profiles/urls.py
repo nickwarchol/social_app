@@ -2,10 +2,10 @@ from django.urls import path
 from .views import ( 
     my_profile_view,
     invites_received_view,
+    profiles_list_view,
+    invite_profiles_list_view,
     ProfileDetailView,
     ProfileListView, 
-    invite_profiles_list_view,
-    ProfileListView,
     send_invatation,
     remove_from_friends,
     accept_invitation,

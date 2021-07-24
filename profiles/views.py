@@ -99,7 +99,7 @@ class ProfileDetailView(DetailView):
         context["rel_sender"] = rel_sender
         context['is_empty'] = False
         context['posts'] = self.get_object().get_all_authors_posts()
-        context['len_posts'] = True if len(self.get_all_authors_posts()) > 0 else False
+        context['len_posts'] = True if len(self.get_object().get_all_authors_posts()) > 0 else False
         return context
 
 class ProfileListView(ListView):
